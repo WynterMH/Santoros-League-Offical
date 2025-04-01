@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll-Driven Animation</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body> 
+<!--Start change here-->
+
+    <!-- Combined Intro and Santos Screen -->
+    <div class="intro-santos-container">
+        <div class="santos-title">SANTOS</div>
+        <div class="prison-scene">
+            <div class="sky"></div>
+        </div>
+    </div>
+
+    <!-- Image Sequence Instead of Bars -->
+    <div class="image-sequence-container" id="first-sequence">
+        <div class="image-sequence">
+            <img src="Panels\Santors behind bars.PNG" alt="Prison 1" class="active">
+            <img src="Panels\Zoom out to window.PNG" alt="Prison 2">
+            <img src="Panels\Sky from bars.PNG" alt="Prison 3">
+            <img src="Panels\sky and feild.PNG" alt="Prison 4">
+        </div>
+    </div>
+
+    <!-- New Image Sequence Before Horizontal Scroll -->
+    <div class="image-sequence-container" id="second-sequence">
+        <div class="image-sequence">
+            <img src="Panels\Young Snatos with dad.PNG" alt="Story 1" class="active">
+            <img src="Panels\Sanots Father drinking.PNG" alt="Story 2">
+            <img src="https://source.unsplash.com/random/1600x900/?story3" alt="Story 3">
+            <img src="https://source.unsplash.com/random/1600x900/?story4" alt="Story 4">
+            <img src="https://source.unsplash.com/random/1600x900/?story5" alt="Story 5">
+        </div>
+    </div>
+<!--End changes here-->
+
+    <!-- Horizontal Scroll Sections (Left to Right) -->
+    <div class="scroll-container">
+        <div class="section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?journey" alt="Journey">
+            <div class="section-title">Journey</div>
+            <div class="image-upload">
+                <label for="image-upload-1">Change Image:</label>
+                <input type="file" id="image-upload-1" accept="image/*">
+            </div>
+        </div>
+        <div class="section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?adventure" alt="Adventure">
+            <div class="section-title">Adventure</div>
+            <div class="image-upload">
+                <label for="image-upload-2">Change Image:</label>
+                <input type="file" id="image-upload-2" accept="image/*">
+            </div>
+        </div>
+        <div class="section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?memory" alt="Memory">
+            <div class="section-title">Memory</div>
+            <div class="image-upload">
+                <label for="image-upload-3">Change Image:</label>
+                <input type="file" id="image-upload-3" accept="image/*">
+            </div>
+            <!-- Flashback Trigger in the middle section -->
+            <div class="flashback-trigger">
+                <span>Click for Flashback</span>
+            </div>
+            <!-- Flashback Content -->
+            <div class="flashback-content">
+                <div class="close-flashback">×</div>
+                <div class="flashback-sequence">
+                    <img src="https://source.unsplash.com/random/1600x900/?past1" alt="Past 1" class="active">
+                    <img src="https://source.unsplash.com/random/1600x900/?past2" alt="Past 2">
+                    <img src="https://source.unsplash.com/random/1600x900/?past3" alt="Past 3">
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?discovery" alt="Discovery">
+            <div class="section-title">Discovery</div>
+            <div class="image-upload">
+                <label for="image-upload-4">Change Image:</label>
+                <input type="file" id="image-upload-4" accept="image/*">
+            </div>
+        </div>
+        <div class="section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?creation" alt="Creation">
+            <div class="section-title">Creation</div>
+            <div class="image-upload">
+                <label for="image-upload-5">Change Image:</label>
+                <input type="file" id="image-upload-5" accept="image/*">
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Sequence Scroller -->
+    <div class="image-sequence-container" id="third-sequence">
+        <div class="image-sequence">
+            <img src="https://source.unsplash.com/random/1600x900/?nature1" alt="Nature 1" class="active">
+            <img src="https://source.unsplash.com/random/1600x900/?nature2" alt="Nature 2">
+            <img src="https://source.unsplash.com/random/1600x900/?nature3" alt="Nature 3">
+            <img src="https://source.unsplash.com/random/1600x900/?nature4" alt="Nature 4">
+            <img src="https://source.unsplash.com/random/1600x900/?nature5" alt="Nature 5">
+        </div>
+    </div>
+
+    <!-- Vertical Scroll Sections -->
+    <div class="vertical-sections-container">
+        <div class="vertical-section">
+            <h2>Continue Your Journey</h2>
+            <p>Scroll down to explore more</p>
+        </div>
+        
+        <div class="vertical-section">
+            <h2>Discover New Horizons</h2>
+            <p>The adventure continues below</p>
+        </div>
+        
+        <div class="vertical-section">
+            <h2>Almost There</h2>
+            <p>Keep scrolling for the next experience</p>
+        </div>
+    </div>
+
+    <!-- Future Section with Zoom Effect -->
+    <div class="future-container">
+        <div class="future-title">FUTURE</div>
+    </div>
+
+    <!-- Horizontal Scroll Sections (Right to Left) -->
+    <div class="right-scroll-container">
+        <div class="right-section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?vision" alt="Vision">
+            <div class="section-title">Vision</div>
+            <div class="image-upload">
+                <label for="image-upload-6">Change Image:</label>
+                <input type="file" id="image-upload-6" accept="image/*">
+            </div>
+        </div>
+        <div class="right-section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?dream" alt="Dream">
+            <div class="section-title">Dream</div>
+            <div class="image-upload">
+                <label for="image-upload-7">Change Image:</label>
+                <input type="file" id="image-upload-7" accept="image/*">
+            </div>
+        </div>
+        <div class="right-section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?inspire" alt="Inspire">
+            <div class="section-title">Inspire</div>
+            <div class="image-upload">
+                <label for="image-upload-8">Change Image:</label>
+                <input type="file" id="image-upload-8" accept="image/*">
+            </div>
+        </div>
+        <div class="right-section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?achieve" alt="Achieve">
+            <div class="section-title">Achieve</div>
+            <div class="image-upload">
+                <label for="image-upload-9">Change Image:</label>
+                <input type="file" id="image-upload-9" accept="image/*">
+            </div>
+        </div>
+        <div class="right-section">
+            <img class="section-image" src="https://source.unsplash.com/random/1600x900/?success" alt="Success">
+            <div class="section-title">Success</div>
+            <div class="image-upload">
+                <label for="image-upload-10">Change Image:</label>
+                <input type="file" id="image-upload-10" accept="image/*">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

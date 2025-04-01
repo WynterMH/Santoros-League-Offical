@@ -1,0 +1,356 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            overflow-x: hidden;
+            background-color: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Combined Intro and Santos Section */
+        .intro-santos-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background: black;
+        }
+        
+        .santos-title {
+            font-size: 6rem;
+            font-weight: bold;
+            transform-origin: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        
+        .prison-scene {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom, #333 0%, #111 100%);
+            overflow: hidden;
+            opacity: 0; /* Initially hidden */
+            will-change: opacity;
+        }
+        
+        .sky {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: 2;
+            will-change: trandsform;
+        }
+
+        /* Image Sequence Container */
+        .image-sequence-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-sequence {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow:hidden;
+        }
+
+        .image-sequence img {
+            position: absolute;
+            top: 0;
+            left: 17%;
+            width:fit-content;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            transform-origin: 5% 15%; /* match the window position*/
+            will-change: opacity;
+            backface-visibility: hidden;
+        }
+
+        .image-sequence img.active {
+            opacity: 1;
+        }
+
+        /* Horizontal Scroll Container */
+        .scroll-container {
+            display: flex;
+            flex-direction: row;
+            width: 500vw; /* Five sections */
+            height: 100vh;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Each Section */
+        .section {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        .section:nth-child(odd) {
+            background: #222;
+        }
+        .section:nth-child(even) {
+            background: #333;
+        }
+        
+        .section-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.6;
+        }
+        
+        .section-title {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+        
+        .image-upload {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Flashback Section */
+        .flashback-trigger {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .flashback-trigger:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .flashback-trigger span {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .flashback-content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: black;
+            display: none;
+            z-index: 100;
+        }
+
+        .flashback-sequence {
+            width: 100%;
+            height: 100%;
+        }
+
+        .flashback-sequence img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .flashback-sequence img.active {
+            opacity: 1;
+        }
+
+        .close-flashback {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        /* Vertical Scroll Sections */
+        .vertical-section {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 4rem;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .vertical-section:nth-child(odd) {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+        }
+        
+        .vertical-section:nth-child(even) {
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+        }
+
+        /* Future Section with Zoom Effect */
+        .future-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            background: #000033;
+            overflow: hidden;
+        }
+        
+        .future-title {
+            font-size: 6rem;
+            font-weight: bold;
+            transform-origin: center;
+            text-shadow: 0 0 20px rgba(100, 100, 255, 0.8);
+            color: #ffffff;
+        }
+
+        /* Right Scroll Container */
+        .right-scroll-container {
+            display: flex;
+            flex-direction: row;
+            width: 500vw; /* Five sections */
+            height: 100vh;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Right Scroll Sections */
+        .right-section {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 5rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            background: #222;
+        }
+        
+        .right-section:nth-child(even) {
+            background: #333;
+        }
+
+        body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    overflow-x: hidden;
+}
+
+/* General Prison Styling */
+.prison {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Prison 2 - Zoom Effect */
+.zoom {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background-color: black;
+}
+
+#zoomImage {
+    width: 250%;
+    height: 60%;
+    object-fit: contain;
+    transform-origin: 22.55% 23%;
+    will-change: transform;
+    max-width: 100%;
+    max-height: 250%;
+}
+
+/* Overlay and Text */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 2rem;
+    text-align: center;
+    opacity: 0;
+    z-index: 20;
+    transition: opacity 0.5s ease;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
