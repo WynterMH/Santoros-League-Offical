@@ -104,14 +104,14 @@
             overflow: hidden;
         }
         .section:nth-child(odd) {
-            background: #222;
+            background: #000;
         }
         .section:nth-child(even) {
-            background: #333;
+            background: #000;
         }
         
         .section-image {
-            width: 100%;
+            width:fit-content;
             height: 100%;
             object-fit: cover;
             position: absolute;
