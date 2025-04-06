@@ -54,6 +54,66 @@
             position: relative;
             overflow: hidden;
         }
+        .image-sequence-container2 {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .image-container {
+            position: absolute;
+            display: inline-block;
+            cursor: pointer;
+            top: 0;
+            left:17%
+            
+        }
+        
+        .primary-image, .secondary-image {
+            position:relative;
+            width: auto; /* Match story image behavior */
+            height: 100%; /* Match story image height */
+            object-fit: cover; /* Match story image behavior */
+            transform-origin: 5% 15%; /* Match story image behavior */
+        }
+        .primary-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .secondary-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .click-indicator {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+        
+        .show {
+            opacity: 1;
+        }
 
         .image-sequence {
             width: 100%;

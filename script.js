@@ -270,5 +270,16 @@ ScrollTrigger.create({
                 }
             }, 2000); // Change image every 2 seconds
         }
-
+        document.getElementById('imageContainer').addEventListener('click', function() {
+            const secondaryImage = document.getElementById('secondaryImage');
+            secondaryImage.classList.toggle('show');
+            
+            // Optional: Change the indicator text when clicked
+            const indicator = this.querySelector('.click-indicator');
+            if (secondaryImage.classList.contains('show')) {
+                indicator.textContent = 'Click to return';
+            } else {
+                indicator.textContent = 'Click for flashback';
+            }
+        });
         
