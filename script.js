@@ -1,6 +1,32 @@
+// =======================  
+// PRELOAD IMAGES  
+// =======================  
+function preloadImages(selector) {  
+    document.querySelectorAll(selector).forEach(img => {  
+        if (img.src) new Image().src = img.src;  
+    });  
+}  
 
-        gsap.registerPlugin(ScrollTrigger);
+// =======================  
+// ANIMATION MANAGER  
+// =======================  
+const AnimationManager = {  
+    init() {  
+        this.preloadAssets();  
+        this.setupAnimations();  
+        this.addEventListeners();  
+    },  
 
+    preloadAssets() {  
+        preloadImages('.image-sequence img');  
+        preloadImages('.section-image');  
+    },  
+
+    setupAnimations() {  
+        gsap.registerPlugin(ScrollTrigger);  
+
+        // ======== YOUR ORIGINAL ANIMATIONS START HERE ======== //
+        
         // Combined Intro and Santos Animation
         const introSantosTimeline = gsap.timeline({
             scrollTrigger: {
@@ -13,79 +39,72 @@
             }
         });
         
-        // First part: SANTOS title zoom and fade
         introSantosTimeline
             .to(".santos-title", {
                 scale: 5,
                 opacity: 0,
                 duration: 1
             })
-            // Reveal prison scene as SANTOS fades
             .to(".prison-scene", {
                 opacity: 1,
                 duration: 0.5
-            }, 0.8) // Start slightly before SANTOS completely fades
-            // Then zoom through the sky
+            }, 0.8)
             .to(".sky", {
                 scale: 1.5,
                 duration: 1
             }, 1.5);
 
         // First Image Sequence Animation
-        // First Image Sequence Animation with Zoom
-const firstSequenceImages = document.querySelectorAll('#first-sequence .image-sequence img');
-gsap.set(firstSequenceImages, { 
-    opacity: 0,
-    scale: 1,
-    x: 0,
-    y: 0
-});
-gsap.set(firstSequenceImages[0], { opacity: 1 });
+        const firstSequenceImages = document.querySelectorAll('#first-sequence .image-sequence img');
+        gsap.set(firstSequenceImages, { 
+            opacity: 0,
+            scale: 1,
+            x: 0,
+            y: 0
+        });
+        gsap.set(firstSequenceImages[0], { opacity: 1 });
 
-ScrollTrigger.create({
-    trigger: "#first-sequence",
-    start: "top top",
-    end: "+=400%", // Increased from 300% for smoother transition
-    pin: true,
-    pinSpacing: true,
-    onUpdate: self => {
-        const progress = self.progress;
-        const totalImages = firstSequenceImages.length;
-        const imageIndex = Math.min(Math.floor(progress * totalImages), totalImages - 1);
-        
-        // Special zoom effect between image 1 and 2 (bars to window)
-        if (imageIndex === 1 && progress * totalImages > 1.5) {
-            const zoomProgress = (progress * totalImages - 1.5) * 2;
-            const zoomScale = 1 + (zoomProgress * 4);
-            const windowX = -0.25 * (zoomScale - 1); // Adjust these values based on your image
-            const windowY = -0.3 * (zoomScale - 1);
-            
-            gsap.to(firstSequenceImages[1], {
-                scale: zoomScale,
-                x: windowX,
-                y: windowY,
-                duration: 0.5
-            });
+        ScrollTrigger.create({
+            trigger: "#first-sequence",
+            start: "top top",
+            end: "+=400%",
+            pin: true,
+            pinSpacing: true,
+            onUpdate: self => {
+                const progress = self.progress;
+                const totalImages = firstSequenceImages.length;
+                const imageIndex = Math.min(Math.floor(progress * totalImages), totalImages - 1);
+                
+                // Special zoom effect
+                if (imageIndex === 1 && progress * totalImages > 1.5) {
+                    const zoomProgress = (progress * totalImages - 1.5) * 2;
+                    const zoomScale = 1 + (zoomProgress * 4);
+                    const windowX = -0.25 * (zoomScale - 1);
+                    const windowY = -0.3 * (zoomScale - 1);
+                    
+                    gsap.to(firstSequenceImages[1], {
+                        scale: zoomScale,
+                        x: windowX,
+                        y: windowY,
+                        duration: 0.5
+                    });
 
-            // When zoom completes, transition to next image
-            if (zoomProgress >= 1) {
-                gsap.to(firstSequenceImages[1], { opacity: 0, duration: 0.5 });
-                gsap.to(firstSequenceImages[2], { opacity: 1, duration: 0.5 });
-            }
-        } 
-        // Standard image sequence progression
-        else {
-            firstSequenceImages.forEach((img, i) => {
-                const isActive = i === imageIndex;
-                img.style.opacity = isActive ? 1 : 0;
-                if (isActive) {
-                    img.style.scale = 1;
-                    img.style.transform = 'translate(0, 0)';
+                    if (zoomProgress >= 1) {
+                        gsap.to(firstSequenceImages[1], { opacity: 0, duration: 0.5 });
+                        gsap.to(firstSequenceImages[2], { opacity: 1, duration: 0.5 });
+                    }
+                } else {
+                    firstSequenceImages.forEach((img, i) => {
+                        const isActive = i === imageIndex;
+                        img.style.opacity = isActive ? 1 : 0;
+                        if (isActive) {
+                            img.style.scale = 1;
+                            img.style.transform = 'translate(0, 0)';
+                        }
+                    });
                 }
-            });
-        }
-    }
-});
+            }
+        });
 
         // Second Image Sequence Animation
         ScrollTrigger.create({
@@ -111,18 +130,27 @@ ScrollTrigger.create({
 
         // First Horizontal Scroll Animation (Left to Right)
         gsap.to(".scroll-container", {
-            x: () => `-${document.querySelector(".scroll-container").scrollWidth - window.innerWidth}px`,
-            ease: "none",
+            x: () => {
+              const container = document.querySelector(".scroll-container");
+              return -(container.scrollWidth - window.innerWidth);
+            },
+            ease: "power2.inOut",
             scrollTrigger: {
-                trigger: ".scroll-container",
-                start: "top top",
-                end: () => `+=${document.querySelector(".scroll-container").scrollWidth - window.innerWidth}`,
-                scrub: true,
-                pin: true,
-                pinSpacing: true,
-                anticipatePin: 1 // Helps prevent jumps
+              trigger: ".scroll-container",
+              start: "top top",
+              end: () => `+=${document.querySelector(".scroll-container").scrollWidth}`,
+              scrub: 1.5, // Smoother scrubbing
+              pin: true,
+              anticipatePin: 1,
+              onUpdate: self => {
+                // Parallax effect for images
+                gsap.to(".section-image", {
+                  xPercent: -self.progress * 15,
+                  ease: "sine.out"
+                });
+              }
             }
-        });
+          });
 
         // Third Image Sequence Animation
         ScrollTrigger.create({
@@ -181,11 +209,11 @@ ScrollTrigger.create({
                 scrub: true,
                 pin: true,
                 pinSpacing: true,
-                anticipatePin: 1 // Helps prevent jumps
+                anticipatePin: 1
             }
         });
 
-        // Zoom in/out effect on first horizontal sections
+        // Zoom effects
         gsap.utils.toArray(".section").forEach((section) => {
             gsap.fromTo(section, { scale: 0.8 }, {
                 scale: 1,
@@ -198,7 +226,6 @@ ScrollTrigger.create({
             });
         });
 
-        // Zoom in/out effect on second horizontal sections
         gsap.utils.toArray(".right-section").forEach((section) => {
             gsap.fromTo(section, { scale: 0.8 }, {
                 scale: 1,
@@ -211,7 +238,22 @@ ScrollTrigger.create({
             });
         });
 
-        // Image upload functionality
+        // ======== YOUR ORIGINAL ANIMATIONS END HERE ======== //
+
+        // New Act Transition
+        gsap.to("#act1-end", { 
+            opacity: 0,
+            scrollTrigger: {
+                trigger: "#act1-end",
+                start: "top center",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    },  
+
+    addEventListeners() {  
+        // Original event listeners
         document.querySelectorAll('input[type="file"]').forEach((input, index) => {
             input.addEventListener('change', function(e) {
                 if (this.files && this.files[0]) {
@@ -223,7 +265,6 @@ ScrollTrigger.create({
                             imgElements[index].src = e.target.result;
                         }
                     };
-                    
                     reader.readAsDataURL(this.files[0]);
                 }
             });
@@ -234,52 +275,82 @@ ScrollTrigger.create({
         const flashbackContent = document.querySelector('.flashback-content');
         const closeFlashback = document.querySelector('.close-flashback');
         
-        flashbackTrigger.addEventListener('click', () => {
-            flashbackContent.style.display = 'block';
-            playFlashbackSequence();
-        });
-        
-        closeFlashback.addEventListener('click', () => {
-            flashbackContent.style.display = 'none';
-        });
-        
-        function playFlashbackSequence() {
-            const flashbackImages = document.querySelectorAll('.flashback-sequence img');
-            let currentIndex = 0;
-            
-            // Reset - show only first image
-            flashbackImages.forEach((img, i) => {
-                img.classList.remove('active');
-                if (i === 0) img.classList.add('active');
+        if(flashbackTrigger) {
+            flashbackTrigger.addEventListener('click', () => {
+                flashbackContent.style.display = 'block';
+                this.playFlashbackSequence();
             });
-            
-            // Auto-play through images
-            const flashbackInterval = setInterval(() => {
-                flashbackImages[currentIndex].classList.remove('active');
-                currentIndex = (currentIndex + 1) % flashbackImages.length;
-                flashbackImages[currentIndex].classList.add('active');
-                
-                // If we've gone through all images, stop the interval
-                if (currentIndex === flashbackImages.length - 1) {
-                    clearInterval(flashbackInterval);
-                    
-                    // Auto-close after last image (optional)
-                    setTimeout(() => {
-                        // flashbackContent.style.display = 'none';
-                    }, 2000);
-                }
-            }, 2000); // Change image every 2 seconds
         }
-        document.getElementById('imageContainer').addEventListener('click', function() {
+        
+        if(closeFlashback) {
+            closeFlashback.addEventListener('click', () => {
+                flashbackContent.style.display = 'none';
+            });
+        }
+
+        // Image container toggle
+        document.getElementById('imageContainer')?.addEventListener('click', function() {
             const secondaryImage = document.getElementById('secondaryImage');
-            secondaryImage.classList.toggle('show');
+            secondaryImage?.classList.toggle('show');
             
-            // Optional: Change the indicator text when clicked
             const indicator = this.querySelector('.click-indicator');
-            if (secondaryImage.classList.contains('show')) {
-                indicator.textContent = 'Click to return';
-            } else {
-                indicator.textContent = 'Click for flashback';
+            if (indicator) {
+                indicator.textContent = secondaryImage?.classList.contains('show') 
+                    ? 'Click to return' 
+                    : 'Click for flashback';
             }
         });
+    },
+
+    playFlashbackSequence() {
+        const flashbackImages = document.querySelectorAll('.flashback-sequence img');
+        let currentIndex = 0;
         
+        flashbackImages.forEach((img, i) => {
+            img.classList.remove('active');
+            if (i === 0) img.classList.add('active');
+        });
+        
+        const flashbackInterval = setInterval(() => {
+            flashbackImages[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % flashbackImages.length;
+            flashbackImages[currentIndex].classList.add('active');
+            
+            if (currentIndex === flashbackImages.length - 1) {
+                clearInterval(flashbackInterval);
+                setTimeout(() => {
+                    // flashbackContent.style.display = 'none';
+                }, 2000);
+            }
+        }, 2000);
+    }
+};
+
+
+// Add this to your animation setup
+ScrollTrigger.create({
+    trigger: ".gif-container",
+    start: "top center",
+    end: "bottom center",
+    onEnter: () => {
+      // Force GIF to restart/play
+      const gif = document.querySelector(".scrolling-gif");
+      gif.style.opacity = 1;
+      gif.src = gif.src; // Restart GIF
+      gsap.to(gif, {
+        scale: 1,
+        opacity: 1,
+        duration: 1.5,
+        ease: "power4.out"
+      });
+    },
+    onLeaveBack: () => {
+      gsap.to(".scrolling-gif", {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.5
+      });
+    }
+  });
+// Initialize when DOM loads
+document.addEventListener('DOMContentLoaded', () => AnimationManager.init());
