@@ -509,3 +509,30 @@
     transform: translate(50%, -50%);
     opacity: 0;
   }
+
+  .typewriter-text {
+    position: absolute;
+    bottom: 15%;
+    left: 75%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    font-family: 'Courier New', monospace;
+    z-index: 150;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+    pointer-events: none;
+}
+
+.typewriter-visible {
+    opacity: 1;
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px) {
+    .typewriter-text {
+        left: 65%;
+        font-size: 1.2rem;
+    }
+}

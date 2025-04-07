@@ -417,3 +417,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // NEW TYPEWRITER OBSERVER (non-conflicting with existing animations)
+document.addEventListener("DOMContentLoaded", () => {
+    const typewriterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const text = entry.target.querySelector('.typewriter-text');
+            if (text) {
+                text.classList.toggle('typewriter-visible', entry.isIntersecting);
+            }
+        });
+    }, { threshold: 0.4 });
+
+    // Target only sections that don't have flashback content
+    document.querySelectorAll('.section:not(.flashback-content)').forEach(section => {
+        typewriterObserver.observe(section);
+    });
+});
