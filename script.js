@@ -354,3 +354,66 @@ ScrollTrigger.create({
   });
 // Initialize when DOM loads
 document.addEventListener('DOMContentLoaded', () => AnimationManager.init());
+
+// In script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const draggable = document.querySelector('.draggable');
+    const checkpoints = document.querySelectorAll('.checkpoint');
+    const checkpointImages = document.querySelectorAll('.checkpoint-img');
+    const endZone = document.querySelector('.end-zone');
+    const trackWidth = document.querySelector('.track').offsetWidth;
+  
+    // Initialize Draggable
+    Draggable.create(draggable, {
+      type: "x",
+      bounds: ".game-container",
+      edgeResistance: 0.65,
+      onPress() {
+        gsap.to(draggable, { scale: 1.2, duration: 0.2 });
+      },
+      onDrag() {
+        const currentX = this.x;
+        
+        // Update draggable position
+        gsap.set(draggable, { x: currentX });
+        
+        // Check checkpoints
+        checkpoints.forEach((cp, index) => {
+          const cpX = parseInt(cp.style.left) / 100 * trackWidth;
+          if (Math.abs(currentX - cpX) < 15) {
+            gsap.to(checkpointImages[index], {
+              opacity: 1,
+              y: 0,
+              duration: 0.3
+            });
+          } else {
+            gsap.to(checkpointImages[index], {
+              opacity: 0,
+              y: 20,
+              duration: 0.3
+            });
+          }
+        });
+  
+        // Check end zone
+        if (currentX >= trackWidth * 0.85) {
+          gsap.to(endZone, {
+            opacity: 1,
+            scale: 1.5,
+            duration: 0.5,
+            onComplete: () => {
+              gsap.to([draggable, endZone], {
+                x: 0,
+                scale: 1,
+                opacity: 1,
+                duration: 1
+              });
+            }
+          });
+        }
+      },
+      onRelease() {
+        gsap.to(draggable, { scale: 1, duration: 0.2 });
+      }
+    });
+  });

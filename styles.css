@@ -438,3 +438,74 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
+  /* Game CSS */
+.game-container {
+    position: relative;
+    width: 80%;
+    height: 100px;
+    margin: 2rem auto;
+    touch-action: none; /* Critical for mobile */
+  }
+  
+  .track {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    right: 5%;
+    height: 4px;
+    background: #555;
+    transform: translateY(-50%);
+  }
+  
+  .draggable {
+    /* Replace original styles */
+    width: 180px; 
+    height: 180px;
+    object-fit: contain;
+    cursor: grab;
+    transition: transform 0.2s ease;
+    /* Keep positioning */
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+  
+  .draggable:active {
+    cursor: grabbing;
+  }
+  
+  .checkpoint {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+  
+  .checkpoint-img {
+    position: absolute;
+    top: -100px;
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  
+  .end-zone {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    width: 40px;
+    height: 40px;
+    border: 2px solid lime;
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    opacity: 0;
+  }

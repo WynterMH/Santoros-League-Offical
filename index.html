@@ -117,10 +117,29 @@
             <img src="Panels\a3p1.png" alt="Nature 1" class="active">
             <img src="Panels\a3p2.png" alt="Nature 2">
             <img src="Panels\a3p3.png" alt="Nature 3">
-            <img src="https://source.unsplash.com/random/1600x900/?nature4" alt="Nature 4">
+            <img src="Panels\a3p4.png" alt="Nature 4">
             <img src="https://source.unsplash.com/random/1600x900/?nature5" alt="Nature 5">
         </div>
     </div>
+
+    <!-- Add this to your HTML -->
+<div class="game-container">
+    <div class="track"></div>
+    <img src="Game\Needle.png" 
+     class="draggable" 
+     alt="Drag icon"
+     draggable="false"> <!-- Prevent browser drag -->
+    <div class="checkpoint" style="left: 30%"></div>
+    <div class="checkpoint" style="left: 60%"></div>
+    <div class="end-zone"></div>
+    <div class="checkpoint-images">
+      <img src="Game\arm2-1.png.png" class="checkpoint-img" style="left: 30%">
+      <img src="Game\arm2-2.png.png" class="checkpoint-img" style="left: 60%">
+    </div>
+  </div>
+  
+  <!-- REQUIRED SCRIPT -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
 
     <!-- Vertical Scroll Sections -->
     <div class="vertical-sections-container">
