@@ -74,6 +74,13 @@ const AnimationManager = {
                 const progress = self.progress;
                 const totalImages = firstSequenceImages.length;
                 const imageIndex = Math.min(Math.floor(progress * totalImages), totalImages - 1);
+
+                firstSequenceImages.forEach((img, i) => {
+                    const isActive = i === imageIndex;
+                    img.style.opacity = isActive ? 1 : 0;
+                    if (isActive) img.classList.add('active');
+                    else img.classList.remove('active');
+                });
                 
                 // Special zoom effect
                 if (imageIndex === 1 && progress * totalImages > 1.5) {
