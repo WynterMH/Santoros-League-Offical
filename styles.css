@@ -536,3 +536,28 @@
         font-size: 1.2rem;
     }
 }
+/* Video Section Styles */
+.video-trigger-section {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: #000;
+}
+
+.scroll-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    opacity: 0;
+    scale: 0.95;
+    transition: opacity 1s ease, scale 1s ease;
+}
+
+.scroll-video.playing {
+    opacity: 1;
+    scale: 1;
+}

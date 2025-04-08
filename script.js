@@ -434,3 +434,40 @@ document.addEventListener("DOMContentLoaded", () => {
         typewriterObserver.observe(section);
     });
 });
+// Updated JavaScript with looping behavior
+ScrollTrigger.create({
+    trigger: ".video-trigger-section",
+    start: "top center",
+    end: "bottom center",
+    onEnter: () => {
+        const video = document.querySelector('.scroll-video');
+        video.classList.add('playing');
+        
+        gsap.to(video, {
+            opacity: 1,
+            scale: 1,
+            duration: 1.5,
+            ease: "power4.out",
+            onStart: () => {
+                video.play().catch(error => {
+                    // Fallback for autoplay restrictions
+                    video.controls = true;
+                });
+            }
+        });
+    },
+    onLeaveBack: () => {
+        const video = document.querySelector('.scroll-video');
+        video.pause();
+        gsap.to(video, {
+            opacity: 0,
+            scale: 0.95,
+            duration: 0.8
+        });
+    }
+});
+onEnter: () => {
+    const video = document.querySelector('.scroll-video');
+    video.currentTime = 0; // Reset to start
+    // ... rest of existing code
+}
