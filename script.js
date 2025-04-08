@@ -114,6 +114,7 @@ const AnimationManager = {
         });
 
         // Second Image Sequence Animation
+        
         ScrollTrigger.create({
             trigger: "#second-sequence",
             start: "top top",
@@ -122,14 +123,18 @@ const AnimationManager = {
             pinSpacing: true,
             onUpdate: self => {
                 const progress = self.progress;
-                const images = document.querySelectorAll('#second-sequence .image-sequence img');
+                const images = document.querySelectorAll('#second-sequence .image-text-pair img');
                 const totalImages = images.length;
-                const imageIndex = Math.min(Math.floor(progress * totalImages), totalImages - 1);
+                const activeIndex = Math.floor(progress * (totalImages - 1));
                 
-                images.forEach((img, i) => {
-                    img.classList.remove('active');
-                    if (i === imageIndex) {
+                images.forEach((img, index) => {
+                    const text = img.nextElementSibling;
+                    if(index === activeIndex) {
                         img.classList.add('active');
+                        gsap.to(text, { opacity: 1, duration: 0.5 });
+                    } else {
+                        img.classList.remove('active');
+                        gsap.to(text, { opacity: 0, duration: 0.3 });
                     }
                 });
             }
@@ -168,14 +173,18 @@ const AnimationManager = {
             pinSpacing: true,
             onUpdate: self => {
                 const progress = self.progress;
-                const images = document.querySelectorAll('#third-sequence .image-sequence img');
+                const images = document.querySelectorAll('#third-sequence .image-text-pair img');
                 const totalImages = images.length;
-                const imageIndex = Math.min(Math.floor(progress * totalImages), totalImages - 1);
+                const activeIndex = Math.floor(progress * (totalImages - 1));
                 
-                images.forEach((img, i) => {
-                    img.classList.remove('active');
-                    if (i === imageIndex) {
+                images.forEach((img, index) => {
+                    const text = img.nextElementSibling;
+                    if(index === activeIndex) {
                         img.classList.add('active');
+                        gsap.to(text, { opacity: 1, duration: 0.5 });
+                    } else {
+                        img.classList.remove('active');
+                        gsap.to(text, { opacity: 0, duration: 0.3 });
                     }
                 });
             }
@@ -296,13 +305,29 @@ const AnimationManager = {
         }
 
         // Image container toggle
+        // In AnimationManager.addEventListeners()
         document.getElementById('imageContainer')?.addEventListener('click', function() {
             const secondaryImage = document.getElementById('secondaryImage');
-            secondaryImage?.classList.toggle('show');
+            const primaryText = document.querySelector('#primaryImage + .flashback-text');
+            const secondaryText = document.querySelector('#secondaryImage + .flashback-text');
             
+            // Toggle visibility
+            secondaryImage.classList.toggle('show');
+            
+            // Animate text transitions
+            gsap.to(secondaryText, { 
+                opacity: secondaryImage.classList.contains('show') ? 1 : 0,
+                duration: 0.5 
+            });
+            gsap.to(primaryText, { 
+                opacity: secondaryImage.classList.contains('show') ? 0 : 1,
+                duration: 0.5 
+            });
+
+            // Original indicator update
             const indicator = this.querySelector('.click-indicator');
             if (indicator) {
-                indicator.textContent = secondaryImage?.classList.contains('show') 
+                indicator.textContent = secondaryImage.classList.contains('show') 
                     ? 'Click to return' 
                     : 'Click for flashback';
             }

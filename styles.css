@@ -570,7 +570,9 @@
     left: 0%;
 }
 
-#first-sequence .sequence-text {
+#first-sequence .sequence-text,
+#second-sequence .sequence-text,
+#third-sequence .sequence-text {
     position: absolute;
     bottom: 15%;
     left: 50%;
@@ -585,11 +587,29 @@
     z-index: 100;
     text-align: center;
     max-width: 80%;
+    width: 100%;
+}
+@media (max-width: 768px) {
+    #first-sequence .sequence-text,
+    #second-sequence .sequence-text,
+    #third-sequence .sequence-text {
+        bottom: 10%;
+        font-size: 1.2rem;
+        max-width: 90%;
+    }
+}
+
+/* Remove any separate #second-sequence text styles */
+/* Keep this activation rule */
+img.active + .sequence-text {
+    opacity: 1;
 }
 
 #first-sequence img.active + .sequence-text {
     opacity: 1;
 }
+
+
 /* Fix for Second Sequence (Flashback) */
 #second-sequence2 .flashback-image-wrapper {
     position: relative;
@@ -622,4 +642,40 @@
     max-width: 100%;
     max-height: 90vh;
     object-fit: contain;
+}
+/* Flashback Pair Container */
+#second-sequence2 .flashback-pair {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Image Positioning (preserve original) */
+#second-sequence2 .primary-image,
+#second-sequence2 .secondary-image {
+    position: relative !important;
+    left: auto !important;
+    transform: none !important;
+    width: auto;
+    height: 90vh;
+    max-width: 90vw;
+    object-fit: contain;
+}
+
+/* Text Styling */
+#second-sequence2 .flashback-text {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 100;
 }
