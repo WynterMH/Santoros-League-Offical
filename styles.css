@@ -700,3 +700,90 @@ img.active + .sequence-text {
 #flashbackContent2 .flashback-sequence img {
     object-fit: contain;
 }
+.fade-horizontal-sequence {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+  }
+  
+  .fade-pair {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  
+  .fade-pair img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: none;
+  }
+  
+  .fade-text {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    text-shadow: 2px 2px 8px black;
+    opacity: 0;
+    z-index: 2;
+    width: 80%;
+    pointer-events: none;
+  }
+  
+  @media (max-width: 768px) {
+    .fade-text {
+      font-size: 1.2rem;
+      width: 90%;
+    }
+  }
+  
+  .gif-fade-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .fade-gif {
+    width: 80%;
+    height: auto;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  .gif-caption {
+    margin-top: 2rem;
+    color: white;
+    font-size: 1.8rem;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+  }
+  
+  @media (max-width: 768px) {
+    .gif-caption {
+      font-size: 1.2rem;
+      padding: 0 1rem;
+    }
+  }
+  

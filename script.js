@@ -23,6 +23,36 @@ const AnimationManager = {
     },  
 
     setupAnimations() {  
+        ScrollTrigger.create({
+            trigger: "#fade-gif-trigger",
+            start: "top center",
+            end: "bottom center",
+            onEnter: () => {
+              gsap.to(".fade-gif", {
+                opacity: 1,
+                scale: 1,
+                duration: 1.2,
+                ease: "power4.out"
+              });
+              gsap.to(".gif-caption", {
+                opacity: 1,
+                duration: 1,
+                delay: 0.3
+              });
+            },
+            onLeaveBack: () => {
+              gsap.to(".fade-gif", {
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.6
+              });
+              gsap.to(".gif-caption", {
+                opacity: 0,
+                duration: 0.5
+              });
+            }
+          });
+          
         gsap.registerPlugin(ScrollTrigger);  
 
         // ======== YOUR ORIGINAL ANIMATIONS START HERE ======== //
@@ -253,6 +283,53 @@ const AnimationManager = {
                 }
             });
         });
+
+        const fadePairs = document.querySelectorAll("#fade-horizontal .fade-pair");
+        fadePairs.forEach((pair) => {
+        gsap.set(pair.querySelector("img"), { opacity: 0, x: "100%" });
+        gsap.set(pair.querySelector(".fade-text"), { opacity: 0 });
+        });
+
+        ScrollTrigger.create({
+        trigger: "#fade-horizontal",
+        start: "top top",
+        end: "+=300%",
+        scrub: true,
+        pin: true,
+        onUpdate: (self) => {
+            const progress = self.progress;
+            const total = fadePairs.length;
+            const index = Math.floor(progress * total);
+            const localProgress = (progress * total) % 1;
+
+            fadePairs.forEach((pair, i) => {
+            const img = pair.querySelector("img");
+            const text = pair.querySelector(".fade-text");
+
+            if (i === index) {
+                gsap.to(img, {
+                opacity: 1,
+                x: `${(1 - localProgress) * 100}%`,
+                duration: 0.2,
+                overwrite: "auto",
+                });
+                gsap.to(text, { opacity: 1, duration: 0.3, overwrite: "auto" });
+            } else if (i === index - 1) {
+                gsap.to(img, {
+                opacity: 1 - localProgress,
+                x: `-${localProgress * 100}%`,
+                duration: 0.2,
+                overwrite: "auto",
+                });
+                gsap.to(text, { opacity: 0, duration: 0.2, overwrite: "auto" });
+            } else {
+                gsap.to(img, { opacity: 0, x: "100%", duration: 0.2, overwrite: "auto" });
+                gsap.to(text, { opacity: 0, duration: 0.2, overwrite: "auto" });
+            }
+            });
+        },
+        });
+
 
         // ======== YOUR ORIGINAL ANIMATIONS END HERE ======== //
 
@@ -541,3 +618,38 @@ onEnter: () => {
     video.currentTime = 0; // Reset to start
     // ... rest of existing code
 }
+const fadePairs = document.querySelectorAll('#fade-sequence .fade-pair');
+
+fadePairs.forEach(pair => {
+    gsap.set(pair.querySelector('img'), { opacity: 0, x: '100%' });
+    gsap.set(pair.querySelector('.fade-text'), { opacity: 0 });
+});
+
+gsap.set(fadePairs[0].querySelector('img'), { opacity: 1, x: '0%' });
+gsap.set(fadePairs[0].querySelector('.fade-text'), { opacity: 1 });
+
+ScrollTrigger.create({
+    trigger: "#fade-sequence",
+    start: "top top",
+    end: "+=300%",
+    scrub: true,
+    pin: true,
+    pinSpacing: true,
+    onUpdate: self => {
+        const progress = self.progress;
+        const total = fadePairs.length;
+        const index = Math.min(Math.floor(progress * total), total - 1);
+
+        fadePairs.forEach((pair, i) => {
+            const img = pair.querySelector('img');
+            const text = pair.querySelector('.fade-text');
+            if (i === index) {
+                gsap.to(img, { opacity: 1, x: '0%', duration: 0.5 });
+                gsap.to(text, { opacity: 1, duration: 0.5 });
+            } else {
+                gsap.to(img, { opacity: 0, x: '100%', duration: 0.5 });
+                gsap.to(text, { opacity: 0, duration: 0.3 });
+            }
+        });
+    }
+});
