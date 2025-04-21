@@ -343,6 +343,52 @@ const AnimationManager = {
                 scrub: true
             }
         });
+        const angerPairs = document.querySelectorAll("#anger-sequence .anger-pair");
+
+ScrollTrigger.create({
+  trigger: "#anger-sequence",
+  start: "top top",
+  end: "+=300%",
+  scrub: true,
+  pin: true,
+  onUpdate: (self) => {
+    const progress = self.progress;
+    const total = angerPairs.length;
+    const index = Math.floor(progress * total);
+    const localProgress = (progress * total) % 1;
+
+    angerPairs.forEach((pair, i) => {
+      const img = pair.querySelector("img");
+      const text = pair.querySelector(".anger-text");
+
+      if (i === index) {
+        // Shake in place
+        gsap.to(img, {
+          opacity: 1,
+          x: () => (Math.random() - 0.5) * 10,
+          y: () => (Math.random() - 0.5) * 10,
+          rotation: () => (Math.random() - 0.5) * 4,
+          duration: 0.1,
+          ease: "none",
+          overwrite: true,
+        });
+
+        gsap.to(text, { opacity: 1, duration: 0.4 });
+      } else {
+        gsap.to(img, {
+          opacity: 0,
+          x: 0,
+          y: 0,
+          rotation: 0,
+          duration: 0.3,
+          overwrite: true,
+        });
+        gsap.to(text, { opacity: 0, duration: 0.3 });
+      }
+    });
+  }
+});
+
     },  
 
     addEventListeners() {  
