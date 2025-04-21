@@ -244,20 +244,8 @@ const AnimationManager = {
             }
         });
 
-        // Second Horizontal Scroll Animation (Right to Left)
-        gsap.from(".right-scroll-container", {
-            x: () => `-${document.querySelector(".right-scroll-container").scrollWidth - window.innerWidth}px`,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".right-scroll-container",
-                start: "top top",
-                end: () => `+=${document.querySelector(".right-scroll-container").scrollWidth - window.innerWidth}`,
-                scrub: true,
-                pin: true,
-                pinSpacing: true,
-                anticipatePin: 1
-            }
-        });
+        
+        
 
         // Zoom effects
         gsap.utils.toArray(".section").forEach((section) => {
