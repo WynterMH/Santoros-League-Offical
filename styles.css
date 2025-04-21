@@ -679,3 +679,24 @@ img.active + .sequence-text {
     transition: opacity 0.5s ease;
     z-index: 100;
 }
+/* New Flashback Section */
+.flashback-trigger-section {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: #000;
+}
+
+#flashbackTrigger2 {
+    background: rgba(200, 0, 0, 0.3);
+    width: 200px;
+    height: 200px;
+}
+
+#flashbackTrigger2:hover {
+    background: rgba(200, 0, 0, 0.5);
+}
+
+#flashbackContent2 .flashback-sequence img {
+    object-fit: contain;
+}

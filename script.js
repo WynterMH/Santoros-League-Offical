@@ -290,6 +290,44 @@ const AnimationManager = {
         const flashbackTrigger = document.querySelector('.flashback-trigger');
         const flashbackContent = document.querySelector('.flashback-content');
         const closeFlashback = document.querySelector('.close-flashback');
+        // Add to AnimationManager.addEventListeners()
+        const flashbackTrigger2 = document.querySelector('#flashbackTrigger2');
+        const flashbackContent2 = document.querySelector('#flashbackContent2');
+        const closeFlashback2 = document.querySelector('#flashbackContent2 .close-flashback');
+
+        if(flashbackTrigger2) {
+            flashbackTrigger2.addEventListener('click', () => {
+                flashbackContent2.style.display = 'block';
+                playFlashbackSequence('#flashbackContent2 .flashback-sequence');
+            });
+        }
+
+        if(closeFlashback2) {
+            closeFlashback2.addEventListener('click', () => {
+                flashbackContent2.style.display = 'none';
+            });
+        }
+
+        // Update playFlashbackSequence to accept selector
+        function playFlashbackSequence(selector) {
+            const flashbackImages = document.querySelectorAll(`${selector} img`);
+            let currentIndex = 0;
+            
+            flashbackImages.forEach((img, i) => {
+                img.classList.remove('active');
+                if (i === 0) img.classList.add('active');
+            });
+            
+            const flashbackInterval = setInterval(() => {
+                flashbackImages[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % flashbackImages.length;
+                flashbackImages[currentIndex].classList.add('active');
+                
+                if (currentIndex === flashbackImages.length - 1) {
+                    clearInterval(flashbackInterval);
+                }
+            }, 2000);
+        }
         
         if(flashbackTrigger) {
             flashbackTrigger.addEventListener('click', () => {
