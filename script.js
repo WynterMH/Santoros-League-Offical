@@ -377,6 +377,63 @@ ScrollTrigger.create({
   }
 });
 
+// In script.js - Add this after anger scene animation
+const zoomPairs = gsap.utils.toArray('.zoom-pair');
+let activeZoomIndex = 0;
+
+ScrollTrigger.create({
+    trigger: ".zoom-sequence-container",
+    start: "top top",
+    end: "+=300%",
+    scrub: 1.2,
+    pin: true,
+    onUpdate: self => {
+        const total = zoomPairs.length;
+        const rawProgress = self.progress * total;
+        const newIndex = Math.floor(rawProgress);
+        const pairProgress = rawProgress % 1;
+
+        // Only update when index changes
+        if (newIndex !== activeZoomIndex) {
+            // Fade out current
+            gsap.to(zoomPairs[activeZoomIndex], {
+                opacity: 0,
+                scale: 0.8,
+                duration: 1.2,
+                ease: "power3.inOut",
+                onComplete: () => {
+                    zoomPairs[activeZoomIndex].classList.remove('active');
+                }
+            });
+
+            // Update index
+            activeZoomIndex = Math.min(newIndex, total - 1);
+
+            // Fade in new
+            gsap.fromTo(zoomPairs[activeZoomIndex],
+                { opacity: 0, scale: 1.3 },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.5,
+                    ease: "power3.inOut",
+                    onStart: () => {
+                        zoomPairs[activeZoomIndex].classList.add('active');
+                    }
+                }
+            );
+        }
+
+        // Continuous zoom effect
+        if (zoomPairs[activeZoomIndex]) {
+            gsap.to(zoomPairs[activeZoomIndex], {
+                scale: 1 - (pairProgress * 0.15),
+                duration: 0.1
+            });
+        }
+    }
+});
+
     },  
 
     addEventListeners() {  
