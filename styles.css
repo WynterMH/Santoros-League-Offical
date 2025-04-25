@@ -8,8 +8,9 @@ body {
     overflow-x: hidden;
     background-color: #111;
     color: rgb(250, 248, 248);
-    font-family: Arial, sans-serif;
+    font-family: 'Courier New', Courier, monospace;
 }
+
 
 /* Combined Intro and Santos Section */
 .intro-santos-container {
@@ -254,6 +255,21 @@ body {
     background: black;
     display: none;
     z-index: 100;
+}
+
+.flashback-text,
+.typewriter-text {
+    display: inline-block !important;
+    width: 250px !important;
+    height: auto !important;           
+    padding: 12px !important;
+    font-size: 1.2rem !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    border-radius: 0 !important;
+    text-align: center;
+    background: white;
+    color: black;
 }
 
 .flashback-sequence {
@@ -776,6 +792,20 @@ z-index: 2;
 width: 80%;
 pointer-events: none;
 }
+.fade-text,
+.typewriter-text {
+    display: inline-block !important;
+    width: 250px !important;
+    height: auto !important;           
+    padding: 12px !important;
+    font-size: 1.2rem !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    border-radius: 0 !important;
+    text-align: center;
+    background: white;
+    color: black;
+}
 
 @media (max-width: 768px) {
 .fade-text {
@@ -870,6 +900,20 @@ opacity: 0;
     z-index: 10;
     width: 80%;
   }
+  .anger-text,
+  .typewriter-text {
+      display: inline-block !important;
+      width: 250px !important;
+      height: auto !important;           
+      padding: 12px !important;
+      font-size: 1.2rem !important;
+      white-space: normal !important;
+      word-break: break-word !important;
+      border-radius: 0 !important;
+      text-align: center;
+      background: white;
+      color: black;
+  }
 
 /* Add to styles.css */
 
@@ -926,6 +970,20 @@ transition: opacity 0.8s ease;
 text-shadow: 3px 3px 12px rgba(0,0,0,0.9);
 width: 80%;
 max-width: 1200px;
+}
+.zoom-text,
+.typewriter-text {
+    display: inline-block !important;
+    width: 250px !important;
+    height: auto !important;           
+    padding: 12px !important;
+    font-size: 1.2rem !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    border-radius: 0 !important;
+    text-align: center;
+    background: white;
+    color: black;
 }
 
 .zoom-pair.active .zoom-text {
