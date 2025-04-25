@@ -739,7 +739,7 @@ ScrollTrigger.create({
                 gsap.to(text, { opacity: 1, duration: 0.5 });
             } else {
                 gsap.to(img, { opacity: 0, x: '100%', duration: 0.5 });
-                gsap.to(text, { opacity: 0, duration: 0.3 });
+                gsap.to(text, { opacity: 0, duration: 0.5 });
             }
         });
     }
