@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body> 
-<!--Start change here-->
+
 
     <!-- Combined Intro and Santos Screen -->
     <div class="intro-santos-container">
@@ -19,10 +19,9 @@
         </div>        
     </div>
 
-    <!-- Image Sequence Instead of Bars -->
+    <!-- Image Sequence behind Bars -->
     <div class="image-sequence-container" id="first-sequence">
         <div class="image-sequence">
-            <!-- Wrap each image with text pair -->
             <div class="image-text-pair"><img</div>
                 <img src="Panels\Santors behind bars.PNG" alt="Prison 1" class="active">
                 <div class="sequence-text" style="left: 10%; bottom: 10%;">"My name is Santoro. You probably don't recognize me now, but I was once your favourite baseball player. “The boy that came from nothing”.. that’s what they called me. Now they say the “prince that never became king”."</div>
@@ -44,7 +43,6 @@
 
 
 <!--First flash back-->
-    <!-- Corrected Flashback Section HTML -->
     <div class="image-sequence-container2" id="second-sequence2">  
         <div class="image-container2" id="imageContainer">  
             <div class="flashback-image-wrapper">
@@ -55,7 +53,6 @@
                         id="primaryImage">  
                     <div class="flashback-text">"but nothing about life's curveballs."</div>
                 </div>
-                
                 <!-- Secondary Image & Text -->
                 <div class="flashback-pair">
                     <img src="Panels\Sanots Father drinking.PNG"  
@@ -68,11 +65,9 @@
         </div>  
     </div>
 
-    <!-- New Image Sequence Before Horizontal Scroll -->
-    <!-- Updated Second Sequence HTML -->
+    <!-- Image Sequence Before Horizontal Scroll -->
     <div class="image-sequence-container" id="second-sequence">
         <div class="image-sequence">
-            <!-- Each image with its own text -->
             <div class="image-text-pair">
                 <img src="Panels\Santoro going to collage.png" alt="Story 3">
                 <div class="sequence-text" style="bottom: 25%; left: 45%;">"College was my escape, my proving ground"</div>
@@ -91,12 +86,10 @@
             </div>
         </div>
     </div>
-<!--End changes here-->
 <!--Act 1 complete-->
 
 
 <!--Act 2 Starts Here-->
-
 
     <!-- Horizontal Scroll Sections (Left to Right) -->
     <div class="scroll-container">
@@ -118,19 +111,7 @@
             <div class="image-upload">
                 
             </div>
-            <!-- Flashback Trigger in the middle section -->
-            <div class="flashback-trigger">
-                <span>Click for Flashback</span>
-            </div>
-            <!-- Flashback Content -->
-            <div class="flashback-content">
-                <div class="close-flashback">×</div>
-                <div class="flashback-sequence">
-                    <img src="https://source.unsplash.com/random/1600x900/?past1" alt="Past 1" class="active">
-                    <img src="https://source.unsplash.com/random/1600x900/?past2" alt="Past 2">
-                    <img src="https://source.unsplash.com/random/1600x900/?past3" alt="Past 3">
-                </div>
-            </div>
+            
         </div>
         <div class="section">
             <img class="section-image" src="Panels\act2p4.png" alt="Discovery">
@@ -156,8 +137,7 @@
 
 
 
-    <!-- Image Sequence Scroller -->
-    <!-- Updated Third Sequence HTML -->
+    <!-- forthImage Sequence Scroller -->
     <div class="image-sequence-container" id="third-sequence">
         <div class="image-sequence">
             <div class="image-text-pair">
@@ -182,13 +162,13 @@
         </div>
     </div>
 
-    <!-- Add this to your HTML -->
+    
     <div class="game-container">
         <div class="track"></div>
         <img src="Game\Needle.png" 
         class="draggable" 
         alt="Drag icon"
-        draggable="false"> <!-- Prevent browser drag -->
+        draggable="false"> 
         <div class="checkpoint" style="left: 30%"></div>
         <div class="checkpoint" style="left: 60%"></div>
         <div class="end-zone"></div>
@@ -201,7 +181,7 @@
   <!-- REQUIRED SCRIPT -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
 
-  <!-- Updated HTML with loop attribute -->
+  <!-- loop attribute -->
     <div class="video-trigger-section">
         <video class="scroll-video" muted playsinline loop>
             <source src="Panels\short.mp4" type="video/mp4">
@@ -209,7 +189,7 @@
         </video>
     </div>
 
-    <!-- New Flashback Container -->
+    <!-- Flashback Container -->
     <div class="flashback-trigger-section">
         <div class="section">
             <div class="flashback-trigger" id="flashbackTrigger2">
@@ -343,22 +323,22 @@
         <img class="section-image" src="Panels\a4p32.png" alt="Journey">
         <div class="typewriter-text" style="bottom: 40%; left: 85%;">"The judge... he listed my crimes. Drug laundering, deception... the weight of it all pressing down on me. And then came the sentence: 20 years. A lifetime."</div>
     </div>
-        <!-- In your HTML, after the anger sequence -->
+        
         <div class="zoom-sequence-container">
             <div class="zoom-stage">
-                <!-- Image 1 -->
+                
                 <div class="zoom-pair active">
                     <img src="Panels\a4p33.png" class="zoom-image">
                     <div class="zoom-text">"The weight of it all..."</div>
                 </div>
                 
-                <!-- Image 2 -->
+                
                 <div class="zoom-pair">
                     <img src="Panels\a4p34.png" class="zoom-image">
                     <div class="zoom-text" style="bottom: 20%; left: 35%;">"...crumbling beneath me."</div>
                 </div>
                 
-                <!-- Image 3 -->
+                
                 <div class="zoom-pair">
                     <img src="Panels\a4p35.png" class="zoom-image">
                     <div class="zoom-text" style="bottom: 20%; left: 25%;">"I thought I could outrun it... but in the end, I’m just a shadow of the man who brought me here."</div>
@@ -368,4 +348,9 @@
     
     
 </body>
+<footer id="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Group 1 class of Media Production and Design. All Rights Reserved.</p>
+    </div>
+  </footer>
 </html>
