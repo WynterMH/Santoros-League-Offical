@@ -687,11 +687,10 @@ object-fit: contain;
 
 #second-sequence2 .flashback-text {
     position: absolute;
-    bottom: 15%;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 35%;
+    left: 30%;
     width: 80%; /* ← KEEP THIS */
-    text-align: center;
+   text-align: center;
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 100;
